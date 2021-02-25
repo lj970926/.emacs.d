@@ -8,7 +8,12 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(auto-save-default nil)
- '(package-selected-packages '(magit ivy org-bullets org dracula-theme evil)))
+ '(company-backends
+   '(company-bbdb company-semantic company-cmake company-capf company-clang company-files
+		  (company-dabbrev-code company-gtags company-etags company-keywords)
+		  company-oddmuse company-dabbrev))
+ '(package-selected-packages
+   '(company-irony company markdown-mode magit ivy org-bullets org dracula-theme evil)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -40,3 +45,6 @@
 (ivy-mode 1)
 (setq ivy-use-virtual-buffers t)
 (setq ivy-count-format "(%d/%d) ")
+(add-hook 'after-init-hook 'global-company-mode)
+(eval-after-load 'company
+  '(add-to-list 'company-backends 'company-irony))
